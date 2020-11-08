@@ -17,24 +17,9 @@
 #include QMK_KEYBOARD_H
 
 #define BASE 0
-#define ARROW 1
+#define NUM 1
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
- /*
-   |      7          |    8    |    9    |
-   |      4          |    5    |    6    |
-   |      1          |    2    |    3    |
-   | Vol. Up-Down    |    0    |    .    |
-   | Toggle Layout 1 |
- */
-
-	[BASE] = LAYOUT(
-		KC_7 , KC_8, KC_9,
-		KC_4 , KC_5, KC_6,
-		KC_1 , KC_2, KC_3,
-		TG(1), KC_0, KC_DOT
-	),
-
  /*
    | End             | Up     | Home      |
    | Left            | Down   | Right     |
@@ -42,12 +27,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    | Vol. Up-Down    | Escape | Enter     |
    | Toggle Layout 1 |
  */  
-
-	[ARROW] = LAYOUT(
+	[BASE] = LAYOUT(
 		KC_END , KC_UP  , KC_HOME  ,
 		KC_LEFT, KC_DOWN, KC_RIGHT ,
 		KC_TAB , KC_DEL , KC_BSPACE,
-		KC_TRNS, KC_ESC , KC_ENT
+		TG(1)  , KC_ESC , KC_ENT
+	),
+	
+ /*
+   |      7          |    8    |    9    |
+   |      4          |    5    |    6    |
+   |      1          |    2    |    3    |
+   | Vol. Up-Down    |    0    |    .    |
+   | Toggle Layout 1 |
+ */
+	[NUM] = LAYOUT(
+		KC_7 , KC_8, KC_9,
+		KC_4 , KC_5, KC_6,
+		KC_1 , KC_2, KC_3,
+		KC_TRNS, KC_0, KC_DOT
 	)
 };
 
@@ -74,8 +72,8 @@ void oled_task_user(void) {
     case BASE:
       oled_write_ln_P(PSTR(""), false);
       break;
-    case ARROW:
-      oled_write_ln_P(PSTR("ARROW"), false);
+    case NUM:
+      oled_write_ln_P(PSTR("NUM"), false);
       break;
     default:
       // Or use the write_ln shortcut over adding '\n' to the end of your string
